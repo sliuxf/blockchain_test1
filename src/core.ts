@@ -3,7 +3,7 @@
 const Web3 = require("web3");		// recommand use require() instead of import here
 const web3 = new Web3();
 
-web3.setProvider(new web3.providers.HttpProvider('http://127.0.0.1:8545'));
+web3.setProvider(new web3.providers.HttpProvider('https://mainnet.infura.io/l98TLSGgk6RMagfke3hw'));
 
 
 //the most recent block number
@@ -32,6 +32,16 @@ const getBlock = async function(){
    return blockInfo
 }
 
+const getLatestBlock = async function(){
+    let latestBln = await web3.eth.getBlock('latest');
+    return latestBln
+}
+
+
+const getTx = async function(txNum: any){
+    let txInfo = await web3.eth.getTransaction(txNum);
+    return txInfo
+}
 
 
 export const Core = function () {
@@ -39,7 +49,9 @@ export const Core = function () {
       eth: web3.eth,
       getCurrentBlockNumber,
       getBlockInfo,
-      getBlock
+      getBlock,
+      getTx,
+      getLatestBlock
     };
   };
 
